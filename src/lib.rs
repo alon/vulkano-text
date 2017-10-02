@@ -84,11 +84,17 @@ impl<'a> DrawText<'a> {
                     store: Store,
                     format: swapchain.format(),
                     samples: 1,
+                },
+                depth: {
+                    load: Clear,
+                    store: DontCare,
+                    format: vulkano::format::Format::D16Unorm,
+                    samples: 1,
                 }
             },
             pass: {
                 color: [color],
-                depth_stencil: {}
+                depth_stencil: {depth}
             }
         ).unwrap()) as Arc<RenderPassAbstract + Send + Sync>;
 
